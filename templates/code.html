@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/datatables/datatables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css">
+	<link rel="stylesheet" type="text/css" href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css">
+	<link rel="stylesheet" type="text/css" href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="https://primasis.net/BengkelNet_Insurance/assets/global/plugins/select2/css/select2-bootstrap.min.css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css">
+	<link href="https://primasis.net/BengkelNet_Insurance/assets/layouts/layout/css/custom.css" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="https://primasis.net/BengkelNet_Insurance/assets/img//BENGKELNET.ico">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/homePages/homeMain.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/homePages/homePage1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/homePages/homePage2.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/homePages/homePage3.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedPages/predeployedMain.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedPages/predeployedPage1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedPages/predeployedPage2.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedPages/predeployedPage3.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedViewPages/predeployedViewMain.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedViewPages/predeployedViewPage1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedViewPages/predeployedViewPage2.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='pages/predeployedViewPages/predeployedViewPage3.js') }}"></script>
+	
+    <title>Skripsi</title>
+</head>
+<body>
+
+<div id="element"></div>
+
+<script>
+$(document).ready(function(){
+    coordAndSizeDetection(pageList);
+    console.log(pageList);
+    $.ajax({
+        type: 'POST',
+        url: '/',
+        data: JSON.stringify([pageList, screenSize]),
+        contentType: "application/json;charset=UTF-8",
+        success : function(resultData){
+            console.log(resultData);
+            displayPage(resultData);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+});
+
+let screenSize = {
+    inner : {
+        width : window.innerWidth,
+        height : window.innerHeight
+    },
+    outer : {
+        width : window.outerWidth,
+        height : window.outerHeight
+    }
+};
+let pageList = [[homeMain, homePage1, homePage2, homePage3], 
+                [predeployedMain, predeployedPage1, predeployedPage2, predeployedPage3], 
+                [predeployedViewMain, predeployedViewPage1, predeployedViewPage2, predeployedViewPage3]];
+let displayedPage = [];
+
+function coordAndSizeDetection(pageList){
+    for(let i = 0; i < pageList.length; i++){ //i bernilai dari 0 sampai banyaknya halaman (3 halaman)
+        for(let j = 0; j < pageList[i].length; j++){ //j bernilai dari 0 sampai banyaknya desain dari suatu halaman (4 desain)
+            let pageContent = pageList[i][j]; //misal: isi dari homePage2
+            document.getElementById("element").innerHTML = pageContent.pageText.text; //tampilkan html dari pageContent ke layar browser
+            let initChildCoord = {};
+            for(let k = 0; k < pageContent.pageText.sequences; k++){ //k bernilai dari 0 sampai banyaknya rangkaian sekuensial dari halaman tersebut
+                $('*', '#element').each(function() { //program membaca tiap baris/line dari code html
+                    if($(this).attr('data-getcoord['+k+']') != undefined){ //jika baris atau div tersebut mengandung atribut data-getcoord, $(this) adalah baris/line yang sedang dibaca program
+                        let temp = 0; //digunakan untuk menandai urutan sekuensial
+                        if($(this).attr('data-func') != undefined){ //jika baris atau div tersebut mengandung atribut data-func
+                            let func = $(this).attr('data-func').split(" ");
+                            if(func[0] == "popUpForm"){
+                                if(func[2] == "open"){
+                                    document.getElementById("scrollable").style.display = "block";
+                                    let form = document.getElementById("form-"+func[1]+"");
+                                    form.className += " modal-overflow in modal-fix";
+                                    form.ariaHidden = "false";
+                                    form.style.display = "block";
+                                }else if(func[2] == "close"){
+                                    setCoord(k, $(this), initChildCoord);
+                                    document.getElementById("scrollable").style.display = "none";
+                                    let form = document.getElementById("form-"+func[1]+"");
+                                    form.className = "modal modal-wide fade";
+                                    form.ariaHidden = "true";
+                                    form.style.display = "none";
+                                    temp++;
+                                }
+                            }else if(func[0] == "displayTabForm"){
+                                let tabForm = document.getElementById("tabForm-"+ func[1] +"");
+                                let a = func[1]-1;
+                                let tabFormPrev = document.getElementById("tabForm-"+ a +"");
+                                tabForm.className += " active";
+                                tabFormPrev.className = "tab-pane";
+                            }
+                        }
+                        if(temp == 0){
+                            setCoord(k, $(this), initChildCoord);
+                        }
+                    }
+                });
+            }
+            orderObject(initChildCoord);
+            pageContent.pageCoord.push(initChildCoord);
+            document.getElementById("element").innerHTML = "";
+        }
+    }
+}
+
+function setCoord(index, data, initChildCoord){
+    let pos = data.offset();
+    let coordObj = {
+        'center' : [data.width()/2 + pos.left, data.height()/2 + pos.top],
+        'size' : [data.width(), data.height()]
+    };
+    initChildCoord[data.attr('data-getcoord['+index+']')] = coordObj;
+}
+
+function orderObject(obj){ //mengurutkan elemen berdasarkan angka pada data-getcoord
+    let arrKey = [], arrKLM = [], arrCoord = [];
+    for(let objKey in obj){
+        let a = objKey.split(" ");	
+        arrKey[a[0]] = a[1];
+        arrKLM[a[0]] = a[2].split(",");
+        arrCoord[a[0]] = obj[objKey];
+        detectScroll(arrKLM[a[0]], arrCoord[a[0]]);
+        delete obj[objKey];
+    }
+    for(let i = 0; i < arrKey.length; i++){
+        obj[arrKey[i]] = {
+            'KLM' : arrKLM[i],
+            'coord' : arrCoord[i],
+            'fittsData' : {
+                'operator' : [],
+                'distance' : [],
+                'width' : []
+            },
+            'time' : 0
+        };
+    }
+}
+
+function detectScroll(klm, obj){ //mendeteksi apakah ada scroll pada halaman
+    let x_max = obj.center[0]+(obj.size[0]/2); //koordinat x pada tepi elemen
+    let y_max = obj.center[1]+(obj.size[1]/2); //koordinat y pada tepi elemen
+    if(x_max > screenSize.outer.width){
+        klm.unshift('rightScroll');
+    }
+    if(y_max > screenSize.inner.height){
+        klm.unshift('bottomScroll');
+    }
+}
+
+function displayPage(data){
+    for(let i = 0; i < Object.keys(data).length; i++){
+        let dataValue = data[i];
+        displayedPage.push(dataValue['pageText'].text);
+    }
+    console.log(displayedPage);
+    document.getElementById("element").innerHTML = displayedPage[0];
+}
+
+function nextDisplayedPage(pageIndex){
+    document.getElementById("element").innerHTML = "";
+    document.getElementById("element").innerHTML = displayedPage[pageIndex];
+}
+
+</script>
+
+</body>
+</html>
